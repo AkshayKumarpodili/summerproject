@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import RollNoService from './RollNo';
 import UserDataService from '../AllOpeartions';
 import {Table,Button} from 'react-bootstrap'
 import { db } from '../firebase';

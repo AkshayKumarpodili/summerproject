@@ -8,8 +8,6 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input';
 //import { sendEmailVerification } from 'firebase/auth';
 import React, {useState} from 'react';
-import { addSignupArray } from '../slices/SignupSlice';
-import { useDispatch } from 'react-redux';
 import UserDataService from '../AllOpeartions';
 import { db } from "../firebase";
 import './Signup.css';
@@ -22,7 +20,7 @@ import { doc, setDoc } from "firebase/firestore";
 
 const Signup = () => {
 
-  const dispatch = useDispatch();
+  
     
     
     const [email, setEmail] = useState("");
@@ -47,7 +45,7 @@ const Signup = () => {
         setError("");
         try 
         {
-            const userCredential = await signUp(email, password);   
+            await signUp(email, password);   
             updateProfile(auth.currentUser, {
               displayName: name,
             })
