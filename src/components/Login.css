@@ -1,0 +1,29 @@
+.q{
+    margin:auto;
+    padding:20px;
+    align-items:center;
+}
+
+
+@media screen and (min-width: 920px) {
+    .q{
+        width:50%;
+        margin:auto;
+      }
+}
+
+
+@media screen and (max-width: 920px) {
+    .q{
+        width:75%;
+        margin:auto;
+      }
+}
+
+
+@media screen and (max-width:500px) {
+    .q{
+        width:100%;
+        
+      }
+}

@@ -1,4 +1,4 @@
-import { db } from "./firebase";
+import { db } from "../firebase";
 
 import {
   collection,
@@ -10,31 +10,33 @@ import {
   doc,
 } from "firebase/firestore";
 
-const UserCollectionRef = collection(db, "rollno");
-class UserDataService {
+
+
+const PlaceCollectionRef = collection(db, "companies");
+class PlaceDataService {
 
   addUser = (newUser) => {
-    return addDoc(UserCollectionRef, newUser);
+    return addDoc(PlaceCollectionRef, newUser);
   };
 
   updateUser = (id, updatedUser) => {
-    const userDoc = doc(db, "rollno", id);
+    const userDoc = doc(db, "companies", id);
     return updateDoc(userDoc, updatedUser);
   };
 
   deleteUser = (id) => {
-    const userDoc = doc(db, "rollno", id);
+    const userDoc = doc(db, "companies", id);
     return deleteDoc(userDoc);
   };
 
   getAllUsers = () => {
-    return getDocs(UserCollectionRef);
+    return getDocs(PlaceCollectionRef);
   };
 
   getUser = (id) => {
-    const userDoc = doc(db, "rollno", id);
+    const userDoc = doc(db, "companies", id);
     return getDoc(userDoc);
   };
 }
 
-export default new UserDataService();
+export default new PlaceDataService();

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import UserDataService from '../../AllOpeartions';
 import { useNavigate } from 'react-router-dom';
 import { Button,Form} from 'react-bootstrap';
+import './Courses.css';
 
 const Trainings = () => {
 
@@ -60,7 +61,7 @@ const Trainings = () => {
  };
 
   return (
-    <>
+    <div className='q'>
        <div className="p-4 box">
         <h2 className="mb-3">Trainings Done</h2>
         <Form onSubmit={handleSubmit}>
@@ -77,7 +78,7 @@ const Trainings = () => {
         </Form>
         </div>
        
-    </>
+    </div>
     
   )
 

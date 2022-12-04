@@ -5,7 +5,9 @@ import { useState } from 'react';
 import GoogleButton from 'react-google-button';
 import { useUserAuth } from '../context/UserAuthContext';
 import {toast} from 'react-toastify';
-
+import { db } from '../firebase';
+import { doc,getDoc } from 'firebase/firestore';
+import './Login.css';
 
 
 
@@ -30,6 +32,24 @@ const Login = () => {
     try {
          
         await logIn(email, password);
+
+          var arr=email.split('@');
+          var userId = arr[0];
+
+          const docRef = doc(db, "rollno", userId);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            var rl=docSnap.data().rollno;
+            console.log("rool no = ",rl);
+            localStorage.setItem("rollno",rl);
+            localStorage.setItem("id",userId);
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+
          navigate("/home");
          toast.success("Logged In Successfully!", {
           position: "top-right",
@@ -76,11 +96,13 @@ const Login = () => {
 
 
   return (
-    <>
+    <div className='q'>
+      <h2 className="mb-3">Firebase Auth Login</h2>
       <div className="p-4 box">
-        <h2 className="mb-3">Firebase Auth Login</h2>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
+
+      
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control type="email" placeholder="Email address" onChange={(e) => setEmail(e.target.value)}/>
           </Form.Group>
@@ -107,7 +129,7 @@ const Login = () => {
           <hr />
           <p> <Link to='/updateemail'> UpdateEmail? </Link> </p>
       </div>
-    </>
+    </div>
   );
 };
 

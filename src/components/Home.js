@@ -1,32 +1,47 @@
 import React from 'react';
-import { Button} from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { useUserAuth } from '../context/UserAuthContext';
 import './Home.css';
-import { Link,useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import {MdEmojiPeople } from "react-icons/md";
-import Companies from '../HomeComponents/companies';
-import {VscAdd} from "react-icons/vsc";
-
+import {useNavigate } from 'react-router-dom';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 const Home = () => {
 
   let {user,logOut} = useUserAuth();
-  console.log("User = ",user);
   const navigate = useNavigate();
   
-  const handleSubmit = () => {
+      const handleSubmit = () => {
      navigate('/companies');
   }
- 
 
+   const handleSubmitFeed = () => {
+    navigate('/newsfeed');
+ }
+
+ const handleSubmitRes = () => {
+  navigate('/resources');
+}
+
+const handleSubmitStu = () => {
+  navigate('/students');
+}
+
+const handleSubmitTic = () => {
+  navigate('/tickets');
+}
+
+const handleSubmitTandP = () => {
+  navigate('/TandP');
+}
+ 
 
   const handleLogOut = async(e) => {
     e.preventDefault();
     try 
      {
         await logOut();
+        localStorage.clear();
         toast.success("Logged Out Successfully!", {
          position: "top-right",
          autoClose: 3000,
@@ -56,70 +71,52 @@ const Home = () => {
      }
   }
 
-  const Courses = useSelector(state=>state.Cre)
-  console.log("courses in home.js = ",Courses);
-
-  const Interns = useSelector(state=>state.Intern)
-  console.log("interns in home.js = ",Interns);
-
-  const Trainings = useSelector(state=>state.Training)
-  console.log("trainings in home.js = ",Trainings);
-
-  const Placements = useSelector(state=>state.Placement)
-  console.log("placements in home.js = ",Placements);
-
-  const Dob = useSelector(state=>state.signUp.Dt)
-  const Number = useSelector(state=>state.signUp.number)
-   const Rollno = useSelector(state=>state.signUp.rollno);
-  const Branch = useSelector(state=>state.signUp.branch);
-  console.log("signup in home.js = ",Dob,Number,Rollno,Branch);
+  const name=localStorage.getItem("name");
+  const email=localStorage.getItem("email");
+  const rl=localStorage.getItem("rollno");
 
 
   return (
-    <div className='container-fluid'>
+    <div className='container main'>
+        <div className='shd shadow rounded-3 mt-4'>
             
-          <div className="row">
-                <div className="col-4">
-                  <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRViCck0-66zUhbxsjl0iMB_LS6YiH31_PyWA&usqp=CAU' alt='Image' className='center'/>
-                </div>
-                    <div className="col-8">
-                    <h3>{user.displayName} </h3>
-                    <h4>{user.email}</h4>
-                    <h2>{Dob}</h2>
-                    <h2>{Number}</h2>
-                    <h2>{Rollno}</h2>
-                    <h4>{Branch}</h4> 
+                <FontAwesomeIcon icon={faUser} className='text-dark p-2' size='4x' />
+                  <div className="details">
+                    <p>{user.displayName} </p>
+                    <p>{user.email}</p>
+                    <p>{name}</p>
+                    <p>{email}</p>
+                    <p>{rl}</p>
                   </div>
-          </div>
+        </div>
         
-          {/* <h2>Name : {user.displayName} </h2>
-           <h2>Email : {user.email}</h2>
-           <h2>DOB : {Dob}</h2>
-           <h2>Mobile : {Number}</h2>
-           <h2>RollNo : {Rollno}</h2>
-           <h2>Branch : {Branch}</h2>  
-           <h2>Courses Done :  </h2> {Courses.map((cres,index) => <h4 className='text-center' key={index}>{cres}</h4>)}
-           <h2>Internships Done : {Interns.map((intern,index) => <h4 className='text-center' key={index}>{intern}</h4>)}</h2>
-           <h2>Trainings Taken : {Trainings.map((training,index) => <h4 className='text-center' key={index}>{training}</h4>)}</h2>
-           <h2>Placed In : {Placements.map((placement,index) => <h4 className='text-center' key={index}>{placement}</h4>)}</h2> */} 
-
-          <div class="list-group">
-            <button type="submit" class="list-group-item list-group-item-action" aria-current="true" onClick={handleSubmit} >
+         
+          <div class="list-group q">
+            <div className='rounded m-1 shadow-sm lis '>
+            <button type="submit" className="list-group-item list-group-item-action border-0 zoom list-group-item-primary" aria-current="true" onClick={handleSubmit} >
               Companies
             </button>
-            <button type="button" class="list-group-item list-group-item-action">A second button item</button>
-            <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-            <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
-            <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
-          </div> 
-
-       <div className='one'> <Button variant='primary' onClick={handleLogOut}>Log Out</Button> </div>
-
-
-           
+            </div>  
+            <div className='rounded m-1 shadow-sm lis'> 
+              <button type="button" className="list-group-item list-group-item-action border-0 zoom list-group-item-primary" aria-current="true" onClick={handleSubmitFeed}>NewsFeed</button> 
+            </div>
+            <div className='rounded m-1 shadow-sm lis'>
+                <button type="button" className="list-group-item list-group-item-action border-0 zoom list-group-item-primary" onClick={handleSubmitRes}>Resources</button> 
+            </div>
+            <div className='rounded m-1 shadow-sm lis'> 
+              <button type="button" className="list-group-item list-group-item-action border-0 zoom list-group-item-primary" onClick={handleSubmitTandP}>T&P Cordinators</button>
+            </div>
+            <div className='rounded m-1 shadow-sm lis'>
+              <button type="button" className="list-group-item list-group-item-action border-0 zoom list-group-item-primary" onClick={handleSubmitStu}>Students</button> 
+            </div>
+            <div className='rounded m-1 shadow-sm lis'>
+              <button type="button" className="list-group-item list-group-item-action border-0 zoom list-group-item-primary" onClick={handleSubmitTic}>Tickets</button> 
+            </div>
+            <div className='rounded m-1 shadow-sm lis'>
+              <button type="button" className="list-group-item list-group-item-action border-0 zoom list-group-item-primary" onClick={handleLogOut}>logOut</button> 
+            </div>
+          </div>        
        </div>
-
-    
   );
 };
 

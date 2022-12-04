@@ -4,12 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { addCoursesArray } from '../../slices/CoursesSlice';
 import {useDispatch} from 'react-redux';
 import UserDataService from '../../AllOpeartions';
-
+import './Courses.css';
 
 const Courses = () => {
  
-  
-  
+    
   const [error, setError] = useState("");
   
   const navigate=useNavigate();
@@ -71,7 +70,7 @@ const Courses = () => {
  };
 
   return (
-    <>
+    <div className='q'>
        <div className="p-4 box">
         <h2 className="mb-3">Register Courses</h2>
         {error && <Alert variant="danger">{error}</Alert>}
@@ -89,7 +88,7 @@ const Courses = () => {
         </Form>
         </div>
        
-    </>
+    </div>
     
   )
 

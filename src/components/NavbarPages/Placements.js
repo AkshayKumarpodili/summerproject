@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addPlacementArray } from '../../slices/PlacementSlice'; 
 import UserDataService from '../../AllOpeartions';
+import './Courses.css';
 
 const Placements = () => {
 
@@ -60,7 +61,7 @@ const Placements = () => {
  };
 
   return (
-    <>
+    <div className='q'>
        <div className="p-4 box">
         <h2 className="mb-3">Companies You Got Placed</h2>
         <Form onSubmit={handleSubmit}>
@@ -77,7 +78,7 @@ const Placements = () => {
         </Form>
         </div>
        
-    </>
+    </div>
     
   )
 

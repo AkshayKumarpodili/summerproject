@@ -20,7 +20,7 @@ const FirestoreData = ({ getUserId }) => {
     getUsers();
   };
   return (
-    <>
+    <div className="table-responsive mt-5 w-100 m-auto">
       <div className="mb-2">
         <Button variant="dark edit" onClick={getUsers}>
           Refresh List
@@ -83,7 +83,7 @@ const FirestoreData = ({ getUserId }) => {
           })}
         </tbody>
       </Table>
-    </>
+    </div>
   );
 };
 

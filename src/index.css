@@ -13,17 +13,18 @@ code {
 }
 
 
-.a {
+/* .a {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  flex: 1;
+  flex: 10;
   align-items: center;
-  
-}
+} */
+
 .content-wrap {
   flex: 1;
 }
+
 
 
 

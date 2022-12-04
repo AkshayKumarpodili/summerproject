@@ -1,16 +1,7 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom';
-import {useState,useEffect} from 'react';
-import PlaceDataService from '../Admin/PlaceAllOperations';
-import './CssFiles/OnCamp.css';
+import React, { useEffect, useState } from "react";
+import PlaceDataService  from "./PlaceAllOperations";
 
-
-
-function Companies() {
- 
-  const [searchTerm,setSearchTerm] = useState("");
-  const navigate = useNavigate();
-
+const GetPlaceData = () => {
 
   const [books, setBooks] = useState([]);
   useEffect(() => {
@@ -24,27 +15,15 @@ function Companies() {
   };
 
 
-const handleToggle = async(e) => {
-  try {
-    navigate('/oncampus');
-  } catch (error) {
-    console.log(error);
-  }
-  
-} 
-
+  const [searchTerm,setSearchTerm] = useState("");
 
   return (
-    <div>      
-        <section>
-          <div className='container cont'>
-              <h2 className='had'>Off Campus</h2>  <h3 className='had1'><button onClick={handleToggle} className='butn'>Go To OnCampus Page</button></h3>
-
-              <div className="searchInput">
+    <div>
+        <div className="searchInput">
                 <input id="searchInput" type="text"  placeholder="Search here..." onChange={(event) => {setSearchTerm(event.target.value);}} />
-              </div>
+        </div>
 
-              <div className='cards'>
+        <div className='cards'>
               {
                   books.filter((val) => {
                     if(searchTerm === ""){
@@ -56,15 +35,14 @@ const handleToggle = async(e) => {
                       <div key={val.id} className='card crd'>
                         <h3>{val.title}</h3>
                         <p className="role">{val.role}</p>
-                        <a href={val.lli}>Link...</a>
+                        <button className='butn' type='submit'>{val.lli}</button>
                       </div>
                   ))
               } 
-              </div>              
-          </div>
-        </section>
-    </div>
-  )
-}
 
-export default Companies;
+       </div>
+    </div>
+  );
+};
+
+export default GetPlaceData;

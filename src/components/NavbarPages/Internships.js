@@ -4,6 +4,7 @@ import { addInternshipArray } from '../../slices/InternshipSlice';
 import {useDispatch} from 'react-redux';
 import UserDataService from '../../AllOpeartions';
 import { useNavigate } from 'react-router-dom';
+import './Courses.css';
 
 const Internships = () => {
   
@@ -60,7 +61,7 @@ const Internships = () => {
  };
 
   return (
-    <>
+    <div className='q'>
        <div className="p-4 box">
         <h2 className="mb-3">Internships You Had Done</h2>
         <Form onSubmit={handleSubmit}>
@@ -77,7 +78,7 @@ const Internships = () => {
         
         </div>
        
-    </>
+    </div>
     
   )
 

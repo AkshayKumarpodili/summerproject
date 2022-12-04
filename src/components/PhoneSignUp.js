@@ -5,10 +5,14 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input';
 import { useUserAuth } from '../context/UserAuthContext';
 import {toast} from 'react-toastify';
+import './NavbarPages/Courses.css';
+import { db } from '../firebase';
+import { doc,getDoc } from 'firebase/firestore';
 
 const PhoneSignUp = () => {
 
     const [number, setNumber] = useState("");
+    const [email, setEmail] = useState("");
     const [error, setError] = useState("");
     const [otp,setOtp] = useState("");
     const [flag, setFlag] = useState(false);
@@ -26,6 +30,26 @@ const PhoneSignUp = () => {
             const response = await setUpRecaptcha(number);
             setConfirmObj(response);
             setFlag(true);
+
+            var arr=email.split('@');
+            var userId = arr[0];
+
+          const docRef = doc(db, "rollno", userId);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            var rl=docSnap.data().rollno;
+            var name=docSnap.data().name;
+            console.log("rool no = ",rl);
+            localStorage.setItem("email",email);
+            localStorage.setItem("name",name);
+            localStorage.setItem("rollno",rl);
+            localStorage.setItem("id",userId);
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
 
         } catch (err) {
             setError(err.message);
@@ -75,12 +99,17 @@ const PhoneSignUp = () => {
     }
 
   return (
-    <>
+    <div className='q'>
       <div className="p-4 box">
             
             <h2 className="mb-3">Firebase Phone Auth Login</h2>
             {error && <Alert variant="danger">{error}</Alert>}
             <Form onSubmit={getOtp} style={{ display: !flag ? "block" : "none" }}>
+
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Control type="email" placeholder="Email address" onChange={(e) => setEmail(e.target.value)}/>
+          </Form.Group>
+
             <Form.Group className="mb-3" controlId="formBasicPhoneNumber">
                 <PhoneInput  defaultCountry='IN' value={number} onChange={setNumber} placeholder = "Enter Phone Number"/>
                 <div id='recaptcha-container'/>
@@ -105,7 +134,7 @@ const PhoneSignUp = () => {
             </div>
             </Form>
        </div>   
-    </>    
+    </div>    
 
     
   )

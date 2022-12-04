@@ -3,7 +3,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Home from './components/Home';
 import { ToastContainer} from 'react-toastify';
-import Navbar from './components/Navbar';
+import NavbarData from './components/NavbarData';
 import 'react-toastify/dist/ReactToastify.css';
 import ProtectedRoute from './components/ProtectedRoute';
 import { Routes,Route } from 'react-router-dom';
@@ -11,13 +11,9 @@ import {Row, Col } from 'react-bootstrap';
 import "./App.css";
 import {UserAuthContextProvider} from "./context/UserAuthContext";
 import PhoneSignUp from './components/PhoneSignUp';
-import Footer from './components/footer/Footer';
 import ForgotPassword from './components/ForgotPassword';
-import ResetPassword from './components/ResetPassword';
 import DefaultPage from './components/DefaultPage';
-import {createContext} from 'react';
 import { useState } from 'react';
-import  ReactSwitch from 'react-switch';
 import Courses from './components/NavbarPages/Courses';
 import Trainings from './components/NavbarPages/Trainings';
 import Placements from './components/NavbarPages/Placements';
@@ -26,20 +22,20 @@ import Internships from './components/NavbarPages/Internships';
 import FirestoreData from './components/FirestoreData';
 import Companies from './HomeComponents/companies';
 import OnCampus from './HomeComponents/OnCampus';
+import Resources from './HomeComponents/Resources';
+import TandPCordinators from './HomeComponents/T&PCordinators';
+import Students from './HomeComponents/Students';
+import NewsFeed from './HomeComponents/NewsFeed';
+import Tickets from './HomeComponents/Tickets';
+//import Apply from './HomeComponents/Apply';
+import ModalSample from './HomeComponents/Modal';
+import AdminLogin from './Admin/AdminLogin';
+import AdminActionPage from './Admin/AdminActionPage';
+import AdminPlacementModal from './Admin/AdminPlacementModal';
+import AdminNewsFeedModal from './Admin/AdminNewsFeedModal';
 
-export const ThemeContext = createContext(null); 
 
 function App() {
-
-const [theme,setTheme] = useState("dark");
-
-
-
-const toggleTheme = () => {
-    setTheme((curr) => (curr === "light" ?  "dark" : "light"));
-};
-
-
 
 const [userId,setUserId] = useState("");
 const getUserIdHandler = (id) => {
@@ -47,30 +43,25 @@ const getUserIdHandler = (id) => {
   setUserId(id);
 }
 
+
   return (
-  <div className='b' id={theme}>
-    
-    <ThemeContext.Provider value={{theme, toggleTheme}}>
-    <Navbar/>
-    <div className='a'>
+  <div>
+    <NavbarData/>
+    <div className='container-fluid'>
+      
     <Row>
       <Col>
-        <UserAuthContextProvider>
-          <div className='switch'> 
-            <label>{theme === "light" ? "Light Mode"  : "Dark Mode"}</label>
-               <ReactSwitch  onChange={toggleTheme} checked={theme === "dark"}/> 
-          </div>   
-          
+        <UserAuthContextProvider>       
           <Routes>
             <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
             <Route path="/firestoredata" element={<FirestoreData  getUserId={getUserIdHandler}/>} />
-            {/* <Route path="/updatedata" element={<UpdateFile />} /> */}
+            <Route path="/adminactionpage" element={<AdminActionPage />} />
+            <Route path="/adminplacementmodal" element={<AdminPlacementModal />} />
+            <Route path="/adminnewsmodal" element={<AdminNewsFeedModal />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />
-            {/* <Route path="/updateemail" element={<UpdateEmail />} /> */}
             <Route path="/" element={<DefaultPage />} />
-            <Route path="/resetpassword" element={<ResetPassword />} />
-            <Route path="/signup" element={<Signup id={userId} setUserId={setUserId} />} />
+            <Route path="/signup" element={<Signup/>} />
             <Route path="/phonesignup" element={<PhoneSignUp />} />
             <Route path="/placements" element={<Placements />} />
             <Route path="/internships" element={<Internships />} />
@@ -78,14 +69,20 @@ const getUserIdHandler = (id) => {
             <Route path="/trainings" element={<Trainings />} />
             <Route path="/companies" element={<Companies />} />
             <Route path="/oncampus" element={<OnCampus />} />
+            <Route path="/students" element={<Students />} />
+            <Route path="/newsfeed" element={<NewsFeed />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/TandP" element={<TandPCordinators />} />
+            <Route path="/tickets" element={<Tickets />} />
+            {/* <Route path="/applypage" element={<Apply />} /> */}
+            <Route path="/modalpage" element={<ModalSample />} />
           </Routes>
           <ToastContainer />
         </UserAuthContextProvider>  
       </Col>
     </Row>
   </div>  
-      <Footer />
-      </ThemeContext.Provider>    
+ 
   </div>  
 )
 }

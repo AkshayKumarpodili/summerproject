@@ -1,5 +1,6 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+  background-color: #305192;
 }
 
 .App-logo {
@@ -14,14 +15,15 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #0645c2;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: violet;
+  
 }
 
 .App-link {
@@ -38,28 +40,6 @@
 }
 
 
- .container-fluid{
-   
-   border-radius: 10px;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  min-height: 100vh;
-  /* background: linear-gradient(45deg, #8460ed, #ff1252); */
-
-  
- }
-
- .center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30px;
-}
-
-
-
-
 
 
 .list-group {
@@ -67,10 +47,9 @@
   margin-top: 100px;
 }
 
-
-
 .box {
   border: 1px solid #dfdfdf;
+  margin-bottom: 10px;
   background-color: #fff;
   border-radius: 10px;
 }
@@ -84,6 +63,7 @@
 
 .g-btn > div,
 .g-btn > div > svg {
+  margin-bottom: 10px;
   width: 40px;
   height: 38px;
 }
@@ -98,32 +78,13 @@
   justify-content: flex-start;
 }
 
-
-#light {
-  background-color: aliceblue;
-  height: 100%;
-}
-
-
-#dark {
-  background-color: blueviolet;
-  height: 100%;
-}
-
-
 .switch  label{
-   padding-top: 5px;
-   font-size: 35px;
-   font-weight: bold;
+  padding-top: 5px;
+  padding-left: 10px;
+  font-size: 35px;
+  font-weight: bold;
 }
 
 
-#light .switch label {
-  color: red;
-}
-
-#dark .switch label {
-  color:greenyellow;
-}
 
 
