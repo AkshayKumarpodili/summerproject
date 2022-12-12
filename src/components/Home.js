@@ -4,7 +4,9 @@ import { useUserAuth } from '../context/UserAuthContext';
 import './Home.css';
 import {useNavigate } from 'react-router-dom';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+//import { Outlet } from 'react-router-dom';
+
 
 const Home = () => {
 
@@ -115,7 +117,8 @@ const handleSubmitTandP = () => {
             <div className='rounded m-1 shadow-sm lis'>
               <button type="button" className="list-group-item list-group-item-action border-0 zoom list-group-item-primary" onClick={handleLogOut}>logOut</button> 
             </div>
-          </div>        
+          </div>
+          {/* <Outlet />         */}
        </div>
   );
 };

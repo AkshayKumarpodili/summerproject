@@ -1,8 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import {useState} from 'react';
 import './CssFiles/OnCamp.css';
-import  data from './OnCampusData.json';
+import {useState,useEffect} from 'react';
+import OnCampusDataService  from '../Admin/OncampusAllOpretions';
 
 
 function OnCampus() {
@@ -10,17 +10,22 @@ function OnCampus() {
   const [searchTerm,setSearchTerm] = useState("");
   const navigate = useNavigate();
 
+
+  const[oncampusdata, setBooks] = useState([]);
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const getUsers = async () => {
+    const data = await OnCampusDataService.getAllUsers();
+    console.log(data.docs);
+    setBooks(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+
+  
  
 
-const handleSubmit = async(e) => {
-  try {
-    navigate('/applypage');
-   
-  } catch (error) {
-    console.log(error);
-  }
-  
-} 
+
 
 
 const handleToggle = async(e) => {
@@ -36,33 +41,51 @@ const handleToggle = async(e) => {
   return (
     <div>      
         <section>
-          <div className='container cont'>
-              <h2 className='had'>On Campus</h2>  <h3 className='had1'><button onClick={handleToggle} className='butn'>Go To Off Campus Page</button></h3>
-
-              <div className="searchInput">
-                <input id="searchInput" type="text"  placeholder="Search here..." onChange={(event) => {setSearchTerm(event.target.value);}} />
+          <div className='container'>
+              <h2 className='text-center bg-success rounded text-white p-2 mt-2 font'>On Campus</h2>  
+              <div className='d-flex justify-content-around'>
+                    
+                    <div class="input-group">
+                      <div class="form-outline">
+                        <input id="search-focus" type="search" placeholder="Search here..." class="form-control" onChange={(event) => {setSearchTerm(event.target.value);}} />
+                        {/* <label class="form-label" for="form1">Search</label> */}
+                      </div>
+                    </div>
+                    <p><button onClick={handleToggle} className='rounded p-2 bg-primary text-white'>OffCampus</button></p>
               </div>
+              
 
-              <div className='cards'>
+              <div className='cards row'>
               {
-                  data.filter((val) => {
+                  oncampusdata.filter((val) => {
                     if(searchTerm === ""){
                       return val;
                     }else if(val.title.toLowerCase().includes(searchTerm.toLowerCase())){
                       return val;
                     }
                   }).map((val) =>(
-                      <div key={val.id} className='card crd'>
-                        <h3>{val.title}</h3>
-                        <p>{val.text}</p>
-                        <p className="role">{val.Role}</p>
-                        <button className='butn' onClick={handleSubmit}>Apply</button>
+                    <div class="col-sm-6 col-md-4 mt-2">
+                      <div key={val.id} className='card shadow h-100 zoom21'>
+                      <div class="card-body">
+                        <h3 className='ofont1 text-center'>{val.title}</h3>
+                        <p className='ofont1'>CGPA : {val.cgpa}</p>
+                       
+
+                        <p className='text-bolder'>Role : {val.role}</p> 
+                          <p className='text-bolder'>Skills : {val.skills}</p> 
+                          <p className='text-bolder'>Responsibilites : {val.responsibilites}</p> 
+                       
+                       
+                      </div>
+                      </div>
                       </div>
                   ))
               } 
 
               </div>
 
+
+              
               
           </div>
  

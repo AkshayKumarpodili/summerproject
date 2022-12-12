@@ -1,21 +1,18 @@
 import React from 'react';
 import { Button,Form} from 'react-bootstrap';
-import { addInternshipArray } from '../../slices/InternshipSlice';
-import {useDispatch} from 'react-redux';
-import UserDataService from '../../AllOpeartions';
 import { useNavigate } from 'react-router-dom';
 import './Courses.css';
 
 const Internships = () => {
   
-    const dispatch = useDispatch();
+  
     const  navigate = useNavigate();
 
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     try {
-      let interns = []
+      let interns = {}
       var c1 = document.getElementById("c1");  
       var c2 = document.getElementById("c2");
       var c3 = document.getElementById("c3");
@@ -23,33 +20,27 @@ const Internships = () => {
       var c5 = document.getElementById("c5");
       var c6 = document.getElementById("c6");
       if(c1.checked)
-        interns.push(c1.value)
+        interns.internone = c1.value;
       if(c2.checked)
-        interns.push(c2.value)
+        interns.interntwo = c2.value;
       if(c3.checked)
-        interns.push(c3.value)
+        interns.internthree = c3.value;
       if(c4.checked)
-        interns.push(c4.value)
+        interns.internfoue = c4.value;
       if(c5.checked)
-        interns.push(c5.value)
+        interns.internfive= c5.value;
       if(c6.checked)
-        interns.push(c6.value)      
+        interns.intersix = c6.value;      
       
-      console.log("interns = ",interns);
+     
 
-       //call Action Creator function addInternshipArray
-       let InternshipActionObj = addInternshipArray(interns);
-       console.log("InternshipActionObj = ",InternshipActionObj.payload);
-       //dispatch InternshipActionObj to store
-       dispatch(InternshipActionObj);
- 
-      
-       await UserDataService.addUser(InternshipActionObj)
-       .then(response => {              
-         console.log("response = ",response.id);
-       })
-       .catch(err => {console.log(err.message)});
+    let UserObj_deserailised=JSON.parse(localStorage.getItem("CreObj"));
+    UserObj_deserailised.interns=interns;
+    let newObj={...UserObj_deserailised};    
+    let internObj = JSON.stringify(newObj);
+    localStorage.setItem("internObj",internObj);
 
+       
            
         navigate("/trainings");
 

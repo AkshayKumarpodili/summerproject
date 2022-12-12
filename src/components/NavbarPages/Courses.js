@@ -1,10 +1,9 @@
 import React,{useState} from 'react';
 import { Button,Form, Alert} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { addCoursesArray } from '../../slices/CoursesSlice';
-import {useDispatch} from 'react-redux';
-import UserDataService from '../../AllOpeartions';
 import './Courses.css';
+
+
 
 const Courses = () => {
  
@@ -12,13 +11,13 @@ const Courses = () => {
   const [error, setError] = useState("");
   
   const navigate=useNavigate();
-  const dispatch = useDispatch();
+ 
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     setError("");
     try {
-      let courses = []
+      let courses = {};
       var d1 = document.getElementById("d1");  
       var d2 = document.getElementById("d2");
       var d3 = document.getElementById("d3");
@@ -26,35 +25,28 @@ const Courses = () => {
       var d5 = document.getElementById("d5");
       var d6 = document.getElementById("d6");
       if(d1.checked)
-        courses.push(d1.value)
+        courses.cone= d1.value
       if(d2.checked)
-        courses.push(d2.value)
+        courses.ctwo= d2.value
       if(d3.checked)
-        courses.push(d3.value)
+        courses.cthree = d3.value
       if(d4.checked)
-        courses.push(d4.value)
+        courses.cfour= d4.value
       if(d5.checked)
-        courses.push(d5.value)
+        courses.cfive = d5.value
       if(d6.checked)
-        courses.push(d6.value)      
+        courses.six = d6.value      
       
-      console.log("courses = ",courses);
-
-      
-      
-      //call Action Creator function addCoursesArray
-      let CoursesActionObj = addCoursesArray(courses);
-      console.log("CoursesActionObj = ",CoursesActionObj.payload);
-      //dispatch CoursesActionObj to store
-      dispatch(CoursesActionObj);
-
+         let UserObj_deserailised=JSON.parse(localStorage.getItem("userObj_serialsed"));
+          UserObj_deserailised.courses=courses;
+          let newObj={...UserObj_deserailised};    
+          let CreObj = JSON.stringify(newObj);
+          localStorage.setItem("CreObj",CreObj);
      
 
-      await UserDataService.addUser(CoursesActionObj)
-      .then(response => {              
-        console.log("response = ",response.id);
-      })
-      .catch(err => {console.log(err.message)});
+      //await setDoc(doc(db, "rollno", uid), courses);
+
+           
 
       
       navigate('/internships');

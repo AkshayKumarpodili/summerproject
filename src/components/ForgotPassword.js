@@ -53,7 +53,7 @@ const ForgotPassword = () => {
 
 
   return (
-    <>
+    <div className='q'>
        <div className="p-4 box">
         <h2 className="mb-3">Forgot Password</h2>
         {error && <Alert variant="danger">{error}</Alert>}
@@ -68,7 +68,7 @@ const ForgotPassword = () => {
         <div className="text-center"> <Link to="/login">Log In</Link> </div>
        
        </div> 
-    </>
+    </div>
   )
 }
 

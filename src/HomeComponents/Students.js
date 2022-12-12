@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Table} from "react-bootstrap";
+import {Table,Button} from "react-bootstrap";
 import UserDataService from "../AllOpeartions";
 
 const Students = () => {
@@ -18,8 +18,11 @@ const Students = () => {
  
   return (
     <div className="table-responsive mt-5 w-75 m-auto">
-      {/* <pre>{JSON.stringify(books, undefined, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(books, undefined, 1)}</pre> */}
         <h3>Students Data</h3>
+        <Button variant="dark edit" onClick={getUsers}>
+          Refresh List
+        </Button>
       <Table striped bordered hover size="sm">
         <thead>
           <tr>

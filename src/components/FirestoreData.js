@@ -74,10 +74,10 @@ const FirestoreData = ({ getUserId }) => {
                     Delete
                   </Button>
                 </td>
-                <td>{doc.payload}</td>
-                <td>{doc.payload}</td>
-                <td>{doc.payload}</td>
-                <td>{doc.payload}</td>
+                {/* <td>{doc.courses}</td>
+                <td>{doc.interns}</td>
+                <td>{doc.placed}</td>
+                <td>{doc.trainings}</td> */}
               </tr>
             );
           })}

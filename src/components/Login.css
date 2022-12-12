@@ -2,27 +2,34 @@
     margin:auto;
     padding:20px;
     align-items:center;
+    
 }
 
 
+.vc{
+    background-color: rgb(208, 240, 240);
+}
+
 @media screen and (min-width: 920px) {
-    .q{
-        width:50%;
+    .qwe{
+        width:75%;
         margin:auto;
       }
+    
 }
 
 
 @media screen and (max-width: 920px) {
-    .q{
+    .q .qwe{
         width:75%;
         margin:auto;
       }
+   
 }
 
 
 @media screen and (max-width:500px) {
-    .q{
+    .q .we{
         width:100%;
         
       }

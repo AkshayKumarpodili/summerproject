@@ -1,14 +1,13 @@
 import React from 'react';
 import { Button,Form} from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addPlacementArray } from '../../slices/PlacementSlice'; 
-import UserDataService from '../../AllOpeartions';
 import './Courses.css';
+import { db } from '../../firebase';
+import { doc, setDoc } from "firebase/firestore"; 
 
 const Placements = () => {
 
-    const dispatch = useDispatch();
+   
     const navigate = useNavigate();
 
     const handleSubmit = async(e) => {
@@ -16,7 +15,7 @@ const Placements = () => {
     
     try {
         
-      let placed = []
+      let placed = {}
       var p1 = document.getElementById("p1");  
       var p2 = document.getElementById("p2");
       var p3 = document.getElementById("p3");
@@ -24,32 +23,29 @@ const Placements = () => {
       var p5 = document.getElementById("p5");
       var p6 = document.getElementById("p6");
       if(p1.checked)
-        placed.push(p1.value)
+        placed.pl1 = p1.value;
       if(p2.checked)
-        placed.push(p2.value)
+        placed.pl2 = p2.value;
       if(p3.checked)
-        placed.push(p3.value)
+        placed.pl3 = p3.value;
       if(p4.checked)
-        placed.push(p4.value)
+        placed.pl4 = p4.value;
       if(p5.checked)
-        placed.push(p5.value)
+        placed.pl5 = p5.value;
       if(p6.checked)
-        placed.push(p6.value)      
+        placed.pl6 = p6.value;      
       
-      console.log("placed = ",placed);
+      
+      var uid = localStorage.getItem("uid")
 
+      let UserObj_deserailised=JSON.parse(localStorage.getItem("trainingObj"));
+      UserObj_deserailised.placed=placed;
+      let finalObj={...UserObj_deserailised};    
+    
 
-       //call Action Creator function addPlacementArray
-       let PlacementActionObj = addPlacementArray(placed);
-       console.log("PlacementActionObj = ",PlacementActionObj.payload);
-       //dispatch PlacementActionObj to store
-       dispatch(PlacementActionObj);
- 
-       await UserDataService.addUser(PlacementActionObj)
-       .then(response => {              
-         console.log("response = ",response.id);
-       })
-       .catch(err => {console.log(err.message)});
+      await setDoc(doc(db, "rollno", uid), finalObj);
+
+     
 
            
         navigate("/login");

@@ -1,41 +1,57 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import './CssFiles/News.css';
-import ModalSample from './Modal';
-import UserDataService from '../AllOpeartions';
-
+import NewsFeedService from '../operations/NewsFeedOperations';
+import TextFeedService from '../operations/TextMessageOperations';
+import { Button } from 'react-bootstrap';
 
 export default function Newsfeed() { 
-
 
   const [vote1,setVote1] = useState(0);
   const [vote2,setVote2] = useState(0);
   const [vote3,setVote3] = useState(0);
   const [vote4,setVote4] = useState(0);
 
-
-  const handleRollNo = async(e) => {
-    e.preventDefault();
-    try {
-
-      const rl = localStorage.getItem("rollno");
-      
-     
-    } catch (err) {
-      console.log(err.message);
-    }
-  }
-
-  const getRnoData = () => {
-    console.log("first");
-    const rl=localStorage.getItem("rollno");
-  }
+  const [news, setNews] = useState([]);
+    useEffect(() => {
+      getUsers();
+    }, []);
   
+    const getUsers = async () => {
+      const data = await NewsFeedService.getAllUsers();
+      console.log(data.docs);
+      setNews(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
 
+
+
+    const [text, setText] = useState([]);
+    useEffect(() => {
+      getText();
+    }, []);
+  
+    const getText = async () => {
+      const data = await TextFeedService.getAllUsers();
+      console.log(data.docs);
+      setText(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+
+  
   
   
   return (
   <div className='container r'>
      <h2 className='text-center hd bg-success rounded text-white p-2 m-3'>T&P NewsFeed</h2> 
+
+
+     <div className='text-center'>
+       
+        <div className='d-flex justify-content-around'>
+          <Button variant="dark edit" onClick={getText}>get Text Msg</Button> 
+          <Button variant="dark edit" onClick={getUsers}>get Link Msg</Button> 
+        </div>
+      </div>
+
     
      <div className='shadow rounded m-2 p-3 '>
           
@@ -64,36 +80,55 @@ export default function Newsfeed() {
 
      <div className='shadow mt-3 mb-2 ms-2 me-2 p-3  rounded '>
            <p className='text-secondary'>PostBy: admin@vnrvjiet.in</p>
-         <p  className='fw-bold w text-dark'> Great opportunity for Web Development !!!! </p>
+         <p  className='fw-bold w text-dark text-center'> Great opportunity for Web Development !!!! </p>
          <div className='d-flex justify-content-between'>
          <a href="https://www.naukri.com/web-developer-jobs-in-hyderabad-secunderabad" className="link-primary">Click Here...</a>
-         <button className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#m" onClick={getRnoData}>Seen count</button>
-         {/* <button className='btn bg-success text-white ' type='submit' onClick={handleRollNo}>Mark as Read</button> */}
-
         </div>
         
      </div>
 
-
-     <div className='shadow mt-3 mb-2 ms-2 me-2 p-3  rounded '>
-           <p className='text-secondary'>PostBy: admin@vnrvjiet.in</p>
-         <p  className='fw-bold w text-dark'> Great opportunity for Web Development !!!! </p>
-         <div className='d-flex justify-content-between'>
-         <a href="https://www.naukri.com/web-developer-jobs-in-hyderabad-secunderabad" className="link-primary">Click Here...</a>
-         <button className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#m" type='submit' onClick={getRnoData}>Seen count</button>
-         {/* <button className='btn bg-success text-white ' type='submit' onClick={handleRollNo}>Mark as Read</button> */}
-
-        </div>
-        
-     </div>
-
-    <div>
-      <ModalSample />
-    </div>
     
+              {
+                  news.map((val) =>(
+                      <div key={val.id} className='shadow rounded mt-3 mb-2 ms-2 me-2 p-3 '>
+                           
+                           <p className='text-secondary'>PostBy: admin@vnrvjiet.in </p>
 
+                           <div> <p className='fw-bold w text-dark text-center'> {val.quest1} </p> </div>
+
+                         <p className="role text-center">{val.msg}</p>
+                     
+                        <div className='d-flex justify-content-between'>
+                          <div className='d-flex'>
+
+                            <a href={val.link}>Click Here...</a>
+                          </div>
+                        </div>
+                      </div>
+                  ))
+                  
+              } 
+
+
+
+              {
+                  text.map((val) =>(
+                      <div key={val.id} className='shadow rounded mt-3 mb-2 ms-2 me-2 p-3 '>
+                           
+                           <p className='text-dark'>PostBy: admin@vnrvjiet.in </p>
+
+                           <div> <p className='fw-bold w text-dark text-center'> {val.ques} </p> </div>
+
+                         <p className="role text-center">{val.mesg}</p>
+                     
+                      </div>
+                  ))
+                  
+              } 
 
 
   </div>
   )
 }
+
+

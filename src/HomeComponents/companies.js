@@ -2,7 +2,8 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import {useState,useEffect} from 'react';
 import PlaceDataService from '../Admin/PlaceAllOperations';
-import './CssFiles/OnCamp.css';
+
+
 
 
 
@@ -37,14 +38,27 @@ const handleToggle = async(e) => {
   return (
     <div>      
         <section>
-          <div className='container cont'>
-              <h2 className='had'>Off Campus</h2>  <h3 className='had1'><button onClick={handleToggle} className='butn'>Go To OnCampus Page</button></h3>
+          <div className='container'>
+              <h2 className='text-center p-2 mt-2 text-white bg-success rounded font'>Off Campus</h2>
+              
 
-              <div className="searchInput">
-                <input id="searchInput" type="text"  placeholder="Search here..." onChange={(event) => {setSearchTerm(event.target.value);}} />
+            <div className='d-flex justify-content-between mt-3'>
+              
+              <div class="input-group">
+                <div class="form-outline">
+                  <input id="search-focus" type="search" placeholder="Search here..." class="form-control" onChange={(event) => {setSearchTerm(event.target.value);}} />
+                  {/* <label class="form-label" for="form1">Search</label> */}
+                </div>
+                
               </div>
+              
+              <p><button onClick={handleToggle} className='rounded p-2 bg-primary text-white'>OnCampus</button></p>
 
-              <div className='cards'>
+            </div>
+
+            
+
+              <div className='cards row' >
               {
                   books.filter((val) => {
                     if(searchTerm === ""){
@@ -53,11 +67,18 @@ const handleToggle = async(e) => {
                       return val;
                     }
                   }).map((val) =>(
-                      <div key={val.id} className='card crd'>
-                        <h3>{val.title}</h3>
-                        <p className="role">{val.role}</p>
-                        <a href={val.lli}>Link...</a>
+                    <div class="col-sm-6 col-md-4 mt-2">
+                      <div key={val.id} className='card shadow h-100 zoom21'>
+                      <div class="card-body">
+                        <h3 className='ofont1 text-center'>{val.title}</h3>
+                        <div className="role ofont1 d-flex m-4">
+                            <div className='text-bolder'>Role :  </div> 
+                            <div> {val.role}</div>
+                        </div>
+                        <a href={val.lli} target="_blank" className='e float-end btn bg-warning'>More Info..</a>
                       </div>
+                      </div>
+                    </div>
                   ))
               } 
               </div>              

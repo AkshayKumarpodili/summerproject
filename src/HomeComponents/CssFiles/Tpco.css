@@ -15,18 +15,10 @@
     text-align: center;
     width: 50%; 
     font-family: 'Playfair Display', serif;
-    /* background:white; */
     background: linear-gradient(to bottom, rgb(255, 255, 255), #e1e1e1dc);
-    /* background: rgba(128, 128, 128, 0.075); */
-    /* cursor: pointer; */
-    /* border-bottom: 1px solid rgba(0, 0, 0, 0.274); */
-    /* box-sizing: content-box; */
-    /* position: relative; */
-    /* outline: none; */
+   
   }
-  /* .tabs:not(:last-child){
-    border-right: 1px solid rgba(0, 0, 0, 0.274);
-  } */
+  
   
   .active-tabs  {
     background: linear-gradient(to bottom, rgb(160, 202, 249), #3815e7);
@@ -67,10 +59,6 @@
     background: linear-gradient(to bottom, rgb(254, 110, 110), #ecb63a);
   }
 
-  /* .tbgd{
-    background: linear-gradient(to bottom, rgb(91, 88, 125), #ecb63a);
-    
-  } */
 
   .tabs:hover{
     border-color:#2c05f0;
@@ -80,9 +68,8 @@
     border: none;
     
   }
-  /* .content-tabs {
-    flex-grow : 1;
-  } */
+  
+  
   .content {
     background: white;
     width: 100%;

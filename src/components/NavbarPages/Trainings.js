@@ -1,21 +1,18 @@
 import React from 'react';
-import { addTrainingArray } from '../../slices/TrainingSlice';
-import { useDispatch } from 'react-redux';
-import UserDataService from '../../AllOpeartions';
 import { useNavigate } from 'react-router-dom';
 import { Button,Form} from 'react-bootstrap';
 import './Courses.css';
 
 const Trainings = () => {
 
-  const dispatch = useDispatch();
+  
   const navigate = useNavigate();
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     
     try {
-      let trainings = []
+      let trainings = {}
       var t1 = document.getElementById("t1");  
       var t2 = document.getElementById("t2");
       var t3 = document.getElementById("t3");
@@ -23,31 +20,28 @@ const Trainings = () => {
       var t5 = document.getElementById("t5");
       var t6 = document.getElementById("t6");
       if(t1.checked)
-        trainings.push(t1.value)
+        trainings.tr1 = t1.value;
       if(t2.checked)
-        trainings.push(t2.value)
+        trainings.tr2 = t2.value;
       if(t3.checked)
-        trainings.push(t3.value)
+        trainings.tr3 = t3.value;
       if(t4.checked)
-        trainings.push(t4.value)
+        trainings.tr4 = t4.value;
       if(t5.checked)
-        trainings.push(t5.value)
+        trainings.tr5 = t5.value;
       if(t6.checked)
-        trainings.push(t6.value)      
+        trainings.tr6 = t6.value;      
       
-      console.log("trainings = ",trainings);  
+      
+
+      let UserObj_deserailised=JSON.parse(localStorage.getItem("internObj"));
+      UserObj_deserailised.trainings=trainings;
+      let newObj={...UserObj_deserailised};    
+      let trainingObj = JSON.stringify(newObj);
+      localStorage.setItem("trainingObj",trainingObj);
+  
        
-       //call Action Creator function addTrainingArray
-       let TrainingActionObj = addTrainingArray(trainings);
-       console.log("TrainingActionObj = ",TrainingActionObj.payload);
-       //dispatch TrainingActionObj to store
-       dispatch(TrainingActionObj);
- 
-       await UserDataService.addUser(TrainingActionObj)
-       .then(response => {              
-         console.log("response = ",response.id);
-       })
-       .catch(err => {console.log(err.message)});
+       
 
            
         navigate("/placements");
