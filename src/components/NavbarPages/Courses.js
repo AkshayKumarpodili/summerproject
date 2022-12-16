@@ -10,6 +10,10 @@ const Courses = () => {
     
   const [error, setError] = useState("");
   
+  //const [nextId, setNextId] = useState(0);
+ 
+  const [name, setName] = useState('');
+  
   const navigate=useNavigate();
  
 
@@ -38,10 +42,12 @@ const Courses = () => {
         courses.six = d6.value      
       
          let UserObj_deserailised=JSON.parse(localStorage.getItem("userObj_serialsed"));
-          UserObj_deserailised.courses=courses;
+          UserObj_deserailised["courses"]=courses;
+          console.log(UserObj_deserailised);
           let newObj={...UserObj_deserailised};    
           let CreObj = JSON.stringify(newObj);
           localStorage.setItem("CreObj",CreObj);
+          
      
 
       //await setDoc(doc(db, "rollno", uid), courses);
@@ -75,6 +81,8 @@ const Courses = () => {
             <Form.Check  type="checkbox" id="d5" label="Artificial Intelligence" value="Artificial Intelligence" />
             <Form.Check  type="checkbox" id="d6" label="Python" value="Python" />
         </Form.Group>
+
+     
 
         <div className="d-grid gap-2"> <Button variant="primary" type="Submit"> Register </Button> </div>
         </Form>

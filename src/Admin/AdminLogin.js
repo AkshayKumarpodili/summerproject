@@ -21,7 +21,7 @@ const AdminLogin = () => {
     setError("");
     try {
          
-            if(email==="admin@vnrvjiet.in" && password==="admin")
+            if(email==="admin@vnrvjiet.in" && password==="AdminLogin123")
             {
               navigate("/AdminActionPage");
               toast.success("Logged In Successfully!", {

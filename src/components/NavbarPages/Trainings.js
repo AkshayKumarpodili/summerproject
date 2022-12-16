@@ -35,7 +35,7 @@ const Trainings = () => {
       
 
       let UserObj_deserailised=JSON.parse(localStorage.getItem("internObj"));
-      UserObj_deserailised.trainings=trainings;
+      UserObj_deserailised["trainings"]=trainings;
       let newObj={...UserObj_deserailised};    
       let trainingObj = JSON.stringify(newObj);
       localStorage.setItem("trainingObj",trainingObj);

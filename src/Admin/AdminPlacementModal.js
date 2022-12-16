@@ -18,6 +18,7 @@ function AdminPlacementModal() {
         try {
             const UserObj={title,role,lli};
             var userId=title;
+            localStorage.setItem("offcampus",userId);
             await setDoc(doc(db, "companies", userId), UserObj);
             console.log("Obj = ",UserObj);
          

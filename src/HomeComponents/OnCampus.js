@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import './CssFiles/OnCamp.css';
 import {useState,useEffect} from 'react';
 import OnCampusDataService  from '../Admin/OncampusAllOpretions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
+import { Button } from 'react-bootstrap';
 
 
 function OnCampus() {
@@ -54,6 +57,7 @@ const handleToggle = async(e) => {
                     <p><button onClick={handleToggle} className='rounded p-2 bg-primary text-white'>OffCampus</button></p>
               </div>
               
+              <Button variant="dark edit" onClick={getUsers}><FontAwesomeIcon icon={faArrowsRotate} /> Refresh Page</Button> 
 
               <div className='cards row'>
               {

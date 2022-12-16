@@ -2,7 +2,11 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import {useState,useEffect} from 'react';
 import PlaceDataService from '../Admin/PlaceAllOperations';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
+import { Button } from 'react-bootstrap';
+import { doc,getDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 
 
@@ -56,7 +60,8 @@ const handleToggle = async(e) => {
 
             </div>
 
-            
+            <Button variant="dark edit" onClick={getUsers}><FontAwesomeIcon icon={faArrowsRotate} /> Refresh Page</Button> 
+
 
               <div className='cards row' >
               {

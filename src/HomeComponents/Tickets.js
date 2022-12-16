@@ -3,7 +3,8 @@ import TicketModalSample from './TicketModal';
 import  TicketDataService from './TicketAllOperations';
 import {Button} from 'react-bootstrap'
 import './CssFiles/Tickets.css';
-//import image3 from '../images/icon.jpeg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
 import image3 from '../images/icon.png';
 
 function Tickets() {
@@ -16,7 +17,7 @@ function Tickets() {
 
   const getUsers = async () => {
     const data = await TicketDataService.getAllUsers();
-    //console.log(data.docs);
+    console.log(data.docs);
     setTickets(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
   
@@ -32,7 +33,8 @@ function Tickets() {
         <div className='d-flex justify-content-between w-75 m-auto'>
           {/* <button className="btn btn-danger " data-bs-toggle="modal" data-bs-target="#m4">Raise Query</button> */}
           <div></div>
-          <Button variant="dark edit mb-2 " onClick={getUsers}>Refresh List</Button> 
+          <Button variant="dark edit" onClick={getUsers}><FontAwesomeIcon icon={faArrowsRotate} /> Refresh Page</Button> 
+
         </div>
       </div>
        

@@ -3,6 +3,9 @@ import './CssFiles/News.css';
 import NewsFeedService from '../operations/NewsFeedOperations';
 import TextFeedService from '../operations/TextMessageOperations';
 import { Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
+
 
 export default function Newsfeed() { 
 
@@ -46,9 +49,9 @@ export default function Newsfeed() {
 
      <div className='text-center'>
        
-        <div className='d-flex justify-content-around'>
-          <Button variant="dark edit" onClick={getText}>get Text Msg</Button> 
-          <Button variant="dark edit" onClick={getUsers}>get Link Msg</Button> 
+        <div className='d-flex justify-content-around'> 
+          <Button variant="dark edit" onClick={getText}><FontAwesomeIcon icon={faArrowsRotate} /> Text Msg</Button> 
+          <Button variant="dark edit" onClick={getUsers}><FontAwesomeIcon icon={faArrowsRotate} /> Link Msg</Button>  
         </div>
       </div>
 

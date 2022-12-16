@@ -39,9 +39,11 @@ const Placements = () => {
       var uid = localStorage.getItem("uid")
 
       let UserObj_deserailised=JSON.parse(localStorage.getItem("trainingObj"));
-      UserObj_deserailised.placed=placed;
-      let finalObj={...UserObj_deserailised};    
-    
+      UserObj_deserailised["placed"]=placed;
+      let finalObj={...UserObj_deserailised}; 
+      let userObj = JSON.stringify(finalObj); 
+      localStorage.setItem("userObj",userObj);  
+      
 
       await setDoc(doc(db, "rollno", uid), finalObj);
 

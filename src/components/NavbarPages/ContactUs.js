@@ -6,7 +6,7 @@ function ContactUs()
 {
     return(
         
-        <div className="container text-center">
+        <div className="container-fluid text-center back">
             <h1 className='display-6 head m-5'>
             <FontAwesomeIcon icon={faAddressBook} className='text-warning me-3 mt-2' size='1x' />ContactUs</h1>
             <img className="w-25 mx-auto" src={image2} />

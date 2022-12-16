@@ -10,7 +10,7 @@ import { doc,getDoc,setDoc } from 'firebase/firestore';
 import './Login.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
-
+import NavbarData from './NavbarData';
 
 
 const Login = () => {
@@ -32,7 +32,7 @@ const Login = () => {
     e.preventDefault();
     setError("");
 
-    if(email === "admin@vnrvjiet.in" && password === "admin")
+    if(email === "admin@vnrvjiet.in" && password === "AdminLogin123")
     {
             //await setDoc(doc(db, "admin", "admin"), Obj);
             navigate('/adminactionpage');
@@ -97,7 +97,7 @@ const Login = () => {
      catch(err) {
     setError(err.message);
     console.log("err = ",err.message);
-    toast.error("Wrong Email or passowrd!", {
+    toast.error("Wrong Email or password!", {
       position: "top-right",
       autoClose: 3000,
       hideProgressBar: false,
@@ -112,7 +112,14 @@ const Login = () => {
     
 };
 
-
+  const handleNumberSubmit = async(e) => {
+    e.preventDefault();
+    try {
+      navigate('/phonesignup');
+    } catch (error) {
+      alert("Wrong");
+    }
+  }
 
 
 
@@ -130,8 +137,9 @@ const Login = () => {
 
 
   return (
+    
     <div className='q'>
-     
+
       <div className="p-4 rounded vc ">
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit} >
@@ -152,7 +160,8 @@ const Login = () => {
         <hr />
         <div> <GoogleButton className=" qwe rounded  m-auto" type="dark" onClick={handleGoogleSignIn}/> </div>  
 
-      
+        
+        <Button className="d-grid gap-2  mt-3 w-50 m-auto" onClick={handleNumberSubmit}> Phone SignIn </Button>
       
       </div>
 
@@ -160,8 +169,7 @@ const Login = () => {
           Don't have an account? <Link to="/signup">Sign up</Link>
           <hr/>
           <p> <Link to='/forgotpassword'> ForgotPassword? </Link> </p>
-          {/* <hr /> */}
-          {/* <p> <Link to='/updateemail'> UpdateEmail? </Link> </p> */}
+       
       </div>
     </div>
 

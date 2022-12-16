@@ -1,13 +1,34 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import {auth} from '../firebase';
+import {toast} from 'react-toastify';
+
 
 function Verify() {
 
     const navigate=useNavigate();
 
     const handleClick = () => {
-        navigate('/courses');
+      
+      if(auth.currentUser.emailVerified === true)
+      {
+         navigate('/courses');
+      }
+
+      else{
+        toast.error("Email Not Verified",  {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+      }
+        
     }
 
   return (

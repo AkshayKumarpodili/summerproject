@@ -1,23 +1,32 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import './Navdata.css';
 
 
 function NavbarData() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="/">T&P</Navbar.Brand>
+        <div className='wd'>
+        <img className='zoom ' src='https://upload.wikimedia.org/wikipedia/en/4/47/VNRVJIETLogo.png' height='50px' />
+        <Navbar.Brand href="#" className='ms-2 font zoom'>T&P Cell</Navbar.Brand>
+        {/* <h4 color='white'>T&P Cell</h4> */}
+        </div>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav>
             <Nav.Link href="/contactus">ContactUs</Nav.Link>
-            <Nav.Link href="/aboutus">About Us</Nav.Link>
+            <Nav.Link href="/aboutus">AboutUs</Nav.Link>
           </Nav>
          
         </Navbar.Collapse>
       </Container>
     </Navbar>
+
+
+
+ 
   );
 }
 
